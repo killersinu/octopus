@@ -1,0 +1,629 @@
+import os
+import random
+from os import system
+import urllib
+import json
+from json import dumps, load
+import argparse
+from urllib.request import urlopen
+system("pip install --upgrade  amino.fix")
+system("pip install gtts")
+system("pip install requests")
+import aminofix as amino
+import time
+from gtts import gTTS
+import requests
+from uuid import uuid4
+client=amino.Client()
+os.system("clear")
+print("\t\033[1;32m octopus  2 .0  \033[1;36m Community Bot \n\n")
+email="woxoli2021@angeleslid.com"
+password="vishnu_143"
+
+client.login(email=email,password=password)
+proxies = {
+  'http': 'http://101.200.127.149:3129',
+  'https': 'http://101.200.127.149:3129'
+}
+
+
+cid="37102602"
+cidy=37102602
+
+
+
+adm=[]
+self=client.socket
+def generate_transaction_id(self):
+        return str(uuid4())
+transaction=generate_transaction_id(self)
+
+admx=["http://aminoapps.com/u/sinu143","http://aminoapps.com/p/o0ax5e"]
+
+client.join_community(cid)
+for i in admx:
+	try:
+		w=client.get_from_code(i).objectId
+		adm.append(w)
+	except:
+		print("Invalid link")
+subclient=amino.SubClient(comId=cid,profile=client.profile)
+msg="""[c]
+
+[C]
+⠀⠀⠀─━━═════⊰⊱ ⬛ ⊰⊱═════━━─
+
+                   ˖˚:➯_ Octopus 2.0❐ ; ↷
+                    ✄┈┈┈┈┈┈┈┈┈┈┈┈
+
+                 Welcome to this group chat.
+ I just would like to welcome you in behalf of all          
+                the members to my chatroom.
+                 y'all are welcomed and loved.
+                  i hope you remember that. 
+    you matter. so let's be kind to each other.
+         ─━━═════⊰⊱ ⬛ ⊰⊱═════━━─
+
+[C]"""
+print("Bot joined community")
+subclient=amino.SubClient(comId=cid,profile=client.profile)
+print("Joining All chatrooms")
+subclient=amino.SubClient(comId=cid,profile=client.profile)
+print("octopus 2.0 Ready")
+l=[]
+lis = ["It is certain",
+    "It is decidedly so",
+    "Without a doubt",
+    "Yes definitely",
+    "You may rely on it",
+    "As I see it yes",
+    "Most likely",
+    "Outlook good",
+    "Yes",
+    "Signs point to yes",
+    "Reply hazy try again",
+    "Ask again later",
+    "Better not tell you now",
+    "Cannot predict now",
+    "Concentrate and ask again",
+    "Don't count on it",
+    "My reply is no",
+    "My sources say no",
+    "Outlook not so good",
+    "Very doubtful","yes","No" ,"Probably","100%", "Not sure"]
+
+@client.event("on_group_member_join")
+def on_group_member_join(data):
+	if data.comId==cidy:
+		try:
+			x=data.message.author.icon
+			response=requests.get(f"{x}")
+			file=open("sample.png","wb")
+			file.write(response.content)
+			file.close()
+			img=open("sample.png","rb")
+			subclient.send_message(chatId=data.message.chatId,message=f"""
+[C]━━━━━━━━━━━━━━━
+[c]Welcome <${data.message.author.nickname}$>
+[C]━━━━━━━━━━━━━━━
+{msg}
+[C]━━━━━━━━━━━━━━━""",embedId=data.message.author.userId,embedTitle=data.message.author.nickname,embedLink=f"ndc://x{cid}/user-profile/{data.message.author.userId}",embedImage=img,mentionUserIds=[data.message.author.userId])
+			print(f"\nwelcomed {data.message.author.nickname} to gc ")
+		except Exception as e:
+			print(e)
+				
+@client.event("on_group_member_leave")
+def on_group_member_leave(data):
+	if data.comId==cidy:
+		try:
+			subclient.send_message(chatId=data.message.chatId,message="""[C]┌──────═━┈┈━═──────┐
+       
+[C]𝐒𝐨𝐦𝐨𝐧𝐞 𝐋𝐞𝐟𝐭 𝐭𝐡𝐞 𝐆𝐂
+[c]𝐏𝐥𝐞𝐚𝐬𝐞 𝐫𝐢𝐩 𝐟𝐨𝐫 𝐡𝐢𝐦
+[c]└──────═━┈┈━═──────┘""")
+			print(f"Someone left the gc")
+		except Exception as e:
+			print(e)
+
+@client.event("on_text_message")
+def on_text_message(data):
+	if data.comId==cidy:
+		ex=data.message.content
+		cd=ex.split(' ')
+		x=cd[0]
+		c=cd[1:]
+		adx=[]
+		for w in cd:
+			adx.append(w)
+		print(adx)
+		if ex:
+			for i in adx:
+				if len(i)<=50:
+					if i[:23]=="http://aminoapps.com/p/" or i[:23]=="http://aminoapps.com/c/":
+						fok=client.get_from_code(i)
+						cidx=fok.path[1:fok.path.index(",")]
+						if cidx!=cid:
+							try:
+								subclient.delete_message(chatId=data.message.chatId,messageId=data.message.messageId,asStaff=True)
+								s=subclient.get_chat_thread(data.message.chatId).title
+								subclient.start_chat(userId=adm,message=f"ndc://x{cid}/user/profile/{data.message.author.userId} was advertisng in {s}")
+								
+								subclient.send_message(chatId=data.message.chatId,message=f"<${data.message.author.nickname} don't advertise here")
+								print("spotted advertiser")
+							except Exception as e:
+								print(e)
+			if x.lower()=="!info" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="[ci]Hey there i m a octopus 2.0 communtiy Bot, Made by sinu ")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!global":
+				try:
+					for i in c:
+						mention = subclient.get_message_info(chatId=data.message.chatId, messageId=data.message.messageId).mentionUserIds
+						for user in mention:
+							h=subclient.get_user_info(userId=str(user)).nickname
+							AID=client.get_user_info(userId=str(user)).aminoId
+							d=client.get_from_code(i).objectId
+							subclient.send_message(chatId=data.message.chatId,message="https://aminoapps.com/u/"+str(AID),embedTitle="http://aminoapps.com/u/anony217887395811",embedContent=f"{h}")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!clear":
+				if x.lower() not in l:
+					try:
+						for i in c:
+							d=int(i)
+							a=subclient.get_chat_messages(chatId=data.message.chatId,size=d)
+							for i in a.messageId:
+								subclient.delete_message(chatId=data.message.chatId,messageId=i,asStaff=True,reason="clear")
+							subclient.send_message(chatId=data.message.chatId,message=f"Cleared {d} messages")
+					except:
+						subclient.send_message(chatId=data.message.chatId,message="[ci]Give Leader or Curator to the Bot to clear")
+				else:
+					subclient.send_message(chatId=data.message.chatId,message="Clear command is locked")
+			if x.lower()=="llock" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message=f"Locked commands {l}")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!lock":
+				if data.message.author.userId in adm:
+					try:
+						for i in c:
+							l.append(i)
+							subclient.send_message(chatId=data.message.chatId,message=f"locked {i} command")
+							print(l)
+							print(f"Info requested by {data.message.author.nickname}")
+					except Exception as e:
+						print(e)
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="This command is only accessible to admin")
+					except Exception as e:
+						print(e)
+			if x.lower()=="!unlock":
+				if data.message.author.userId in adm:
+					try:
+						for i in c:
+							l.remove(i)
+							subclient.send_message(chatId=data.message.chatId,message=f"Unlocked {i} command")
+							print(l)
+							print(f"Info requested by {data.message.author.nickname}")
+					except Exception as e:
+						print(e)
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="This command is only accessible to admin")
+					except Exception as e:
+						print(e)
+			if x.lower()=="!say":
+				if x.lower() not in l:
+					if c==[]:
+						try:
+							subclient.send_message(chatId=data.message.chatId,message=f"{data.message.author.nickname}, i can't talk unless you write something after say !")
+						except:
+							pass
+					else:
+						try:
+							t=''
+							lx='en'
+							for i in c:
+								t=t+i
+							out=gTTS(text=t,lang=lx,tld='co.in',slow=False)
+							out.save("soundfx.mp3")
+							with open("soundfx.mp3","rb") as f:
+								subclient.send_message(chatId=data.message.chatId,file=f,fileType="audio")
+							f.close()
+							print(f"Info requested by {data.message.author.nickname}")
+						except Exception as e:
+							print(e)
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="say command is locked")
+					except:
+						pass
+			if x.lower()=="!join":
+				if c==[]:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message=f"{data.message.author.nickname}, you have to paste the link after join")
+					except:
+						pass
+				else:
+					try:
+						for i in c:
+							try:
+								d=client.get_from_code(i).objectId
+								subclient.join_chat(chatId=d)
+								subclient.send_message(chatId=data.message.chatId,message="Joined chatroom !!")
+							except Exception as e:
+								print(e)
+						print(f"Info requested by {data.message.author.nickname}")
+					except Exception as e:
+						print(e)
+			if x.lower()==",vc" and c==[]:
+				try:
+					subclient.invite_to_vc(userId=data.message.author.userId,chatId=data.message.chatId)
+					print(f"Invited {data.message.author.nickname} to vc")
+				except Exception as e:
+					print(e)
+					subclient.send_message(chatId=data.message.chatId,message=f"[ic]I dont have co/host/host/staff id to invite u to vc, <$@{data.message.author.nickname}$>")
+			if x.lower()=="!inviteall" and c==[]:
+				if x.lower() not in l:
+					try:
+						h=subclient.get_all_users(start=0,size=1000).profile.userId
+						m=len(h)
+						for u in h:
+							try:
+								subclient.invite_to_chat(userId=u,chatId=data.message.chatId)
+							except Exception as e:
+								print(e)
+								pass
+						subclient.send_message(chatId=data.message.chatId,message=f"[ic]Invited {m} users in GC")
+						print(f"invited {data.message.author.nickname} to vc")
+					except Exception as e:
+						print(e)
+						subclient.send_message(chatId=data.message.chatId,message=f"[ic]I dont have co/host/host/staff id to invite u to vc, <$@{data.message.author.nickname}$>")
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="Inviteall command is locked")
+					except:
+						pass
+			if x.lower()=="!pm" and c==[]:
+				if x.lower() not in l:
+					try:
+						subclient.start_chat(userId=data.message.author.userId,message="hello sir im octopus here !")
+						subclient.send_message(chatId=data.message.chatId,message=f"Check your pm <${data.message.author.nickname}$> !!",mentionUserIds=[data.message.author.userId])
+						print(f"invite {data.message.author.nickname} to pm")
+					except Exception as e:
+						print(e)
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message=f"Pm command is locked <${data.message.author.nickname}$> !!",mentionUserIds=[data.message.author.userId])
+					except:
+						pass
+			if x.lower()=="!startvc" and c==[]:
+				if x.lower() not in l:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="Starting VC in 3 seconds ")
+						time.sleep(3)
+						client.start_vc(comId=cid,chatId=data.message.chatId,joinType=1)
+						#subclient.send_message(chatId=data.message.chatId,message=f"Vc started")
+						print(f"VC started")
+					except Exception as e:
+						print(e)
+						try:
+							subclient.send_message(chatId=data.message.chatId,message=f"[ic]I dont have co/host/host id to run that command, <${data.message.author.nickname}$>",mentionUserIds=[data.message.author.userId])
+						except:
+							pass
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message=f"Start command is locked <${data.message.author.nickname}$> !!",mentionUserIds=[data.message.author.userId])
+					except:
+						pass
+			if x.lower()=="!endlive" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="Ending VC in 3 seconds ")
+					time.sleep(3)
+					client.end_vc(comId=cid,chatId=data.message.chatId,joinType=2)
+				except Exception as e:
+					print(e)
+					subclient.send_message(chatId=data.message.chatId,message=f"[ic]I dont have co/host/host/staff id to run that command, <${data.message.author.nickname}$>",mentionUserIds=[data.message.author.userId])
+			if x.lower()=="!onlinemem" and c==[]:
+				if x.lower() not in l:
+					try:
+						o=""
+						q=subclient.get_online_users(start=0,size=1000)
+						for uid in q.profile.nickname:
+							o=o+uid+"n"
+						subclient.send_message(chatId=data.message.chatId,message=f"""[c]Online Members
+[c]𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁
+[c]{o}
+[c]𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁""")
+						print("done")
+					except Exception as e:
+						print(e)
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="Members command is locked")
+					except:
+						pass
+
+			if x.lower()=="!goodmorning" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message=f"[cb]Good morning sir have great day  <${data.message.author.nickname}$> !!",mentionUserIds=[data.message.author.userId])
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!follow" and c==[]:
+				try:
+					subclient.follow(userId=data.message.author.userId)
+					subclient.send_message(chatId=data.message.chatId,message=f"[c]I started following <${data.message.author.nickname}$> ",mentionUserIds=[data.message.author.userId])
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!goodevening" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message=f"[cb] Good Evening sir <${data.message.author.nickname}$> !!",mentionUserIds=[data.message.author.userId])
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!love":
+				try:
+					for i in c:
+						msg = i + " null null "
+						msg = msg.split(" ")
+						msg[2] = msg[1]
+						msg[1] = msg[0]
+						subclient.send_message(chatId=data.message.chatId, message=f"""[c]-----------------
+[c]Match ❤️  {random.randint(0,100)}%
+[c]---------------""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!match" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""
+[bi]hello
+octopus 2.0 online sir """)
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!help" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""
+[C]help commands 
+· · ─────── ·𖥸· ─────── · ·
+
+                goodmorning              
+                goodnight                   
+                chat
+                admins
+                joke
+                follow
+                love
+                gf 
+                info
+                meme
+                nickname
+                profilepic
+                8ball
+                coin
+                onlinemem
+
+┌──────═━┈┈━═──────┐
+       Octopus 2.0 made by 
+                              ╰─►Sinu
+└──────═━┈┈━═──────┘""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!coin":
+				try:
+					for i in c:
+						d=int(i)
+						print(transaction)
+						subclient.send_coins(coins=d, chatId=data.message.chatId, transactionId=transaction)
+						subclient.send_message(chatId=data.message.chatId,message=f"Sent {d} coins to Host")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!goodnight" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message=f"[cb]Good night sir have a sweet dreams <${data.message.author.nickname}$> !!",mentionUserIds=[data.message.author.userId])
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!adminlist" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""[c][C]╘◖═════════════════◗╛
+
+[C]⋮❐Admins
+                           ╭┄┈┄────────❥•
+                           │⋮❐. [VILLEN|
+http://aminoapps.com/u/sinu143]
+                           │⋮❐. [SINU|
+http://aminoapps.com/p/v16d20]
+                           │⋮❐. [TERRY|
+http://aminoapps.com/u/TerryMcGinnis73]
+                           │⋮❐. [AYTAN|
+http://aminoapps.com/p/42in2f]
+                           │⋮❐. [HAZEL|
+http://aminoapps.com/p/hpx0x6]
+                           │⋮❐. [KATHERINE|
+http://aminoapps.com/u/Katherine408107511511]
+                           ╰┄┈┄──❥•
+[C]╒◖═════════════════◗╕
+			  """)
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!nickname":
+				try:
+					t=''
+					for i in c:
+						t=t+i
+						subclient.edit_profile(nickname=t)
+						subclient.send_message(chatId=data.message.chatId,message=f"My name changed to {i}")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!profilepic" and c==[]:
+				try:
+					info = subclient.get_message_info(chatId = data.message.chatId, messageId = data.message.messageId)
+					reply_message = info.json['extensions']
+					if reply_message:
+						image = info.json['extensions']['replyMessage']['mediaValue']
+						filename = image.split("/")[-1]
+						filetype = image.split(".")[-1]
+						urllib.request.urlretrieve(image, filename)
+						with open(filename, 'rb') as fp:
+							for i in range(1,8):
+								try:
+									subclient.edit_profile(icon=fp)
+								except Exception as e:
+									subclient.send_message(data.message.chatId, message="Profile pic changed",replyTo=data.message.messageId)
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!playlist" and c==[]:
+				try:
+					files=os.listdir("music")
+					o=""
+					for f in files:
+						o=o+f+"\n"
+					subclient.send_message(chatId=data.message.chatId,message=f"""
+[c]Music Playlist
+[c]𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁
+{0}
+𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁𐄙𐄁""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!gf" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""[bi]don't worry sir/maam
+[i] I'm searching in Google  ...""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!joke" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""[i]What do you call a couple of chimpanzees sharing an Amazon account? PRIME-mates.""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!8ball":
+				try:
+					subclient.send_message(chatId=data.message.chatId,message=str(random.choice(lis)),replyTo=data.message.messageId)
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!play":
+				if subclient.get_chat_thread(data.message.chatId).title!=None:
+					mx=random.choice(os.listdir("music"))
+					if x.lower() not in l:
+						sounds=f"music/{mx}"
+						with open(sounds,"rb") as f:
+							try:
+								subclient.send_message(chatId=data.message.chatId,file=f,fileType="audio")
+								print(f"Info requested by {data.message.author.nickname}")
+							except Exception as e:
+								print(e)
+					else:
+						try:
+							subclient.send_message(chatId=data.message.chatId,message="command is locked")
+						except:
+							pass
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="command works only in pm, type /pm to make jarvis join pm")
+					except:
+						pass
+			if x.lower()=="!meme":
+				if subclient.get_chat_thread(data.message.chatId).title!=None:
+					hx=random.choice(os.listdir("memes"))
+					if x.lower() not in l:
+						sounds=f"memes/{hx}"
+						with open(sounds,"rb") as f:
+							try:
+								subclient.send_message(chatId=data.message.chatId,file=f,fileType="image")
+								print(f"Info requested by {data.message.author.nickname}")
+							except Exception as e:
+								print(e)
+					else:
+						try:
+							subclient.send_message(chatId=data.message.chatId,message=" command is locked")
+						except:
+							pass
+				else:
+					try:
+						subclient.send_message(chatId=data.message.chatId,message="command works only in pm, type /pm to make octopus join pm")
+					except:
+						pass
+			if x.lower()=="!team" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""[c]
+◤◢◣◥◤◢◣◥◤◢◣◥◤◢◣◥
+
+          𖥻 ⤿ TEAM ▾ !¡
+
+      Sinu - itz_killer_sinu
+      ⠀ ‌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+      Terry - terr_y996
+      ⠀ ‌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+      Hazel - im_bunny_
+
+◤◢◣◥◤◢◣◥◤◢◣◥◤◢◣◥  """)
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!admins" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""[c]
+━━━━━━━━┛ ✠ ┗━━━━━━━━
+
+  -ˏˋ. * admins commands * ˊˎ-
+
+                      admin
+                      join
+                      global
+                      team
+                      unlock
+                      pm
+                      lock
+                      ilock
+
+━━━━━━━━┓ ✠ ┏━━━━━━━━""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			if x.lower()=="!chat" and c==[]:
+				try:
+					subclient.send_message(chatId=data.message.chatId,message="""ㅤㅤㅤㅤㅤㅤㅤ╭┈─────── ೄྀ࿐ ˊˎ-
+ㅤㅤㅤㅤㅤㅤㅤ╰┈─➤ ❝ chats ❞
+
+                                   startvc
+                                   endlive
+                                   inviteall
+                                   play
+                                   clear
+                                   playlist 
+
+                        ⌎⊱⊶⊷⊶⊷⊶⊷⊶⊷⇲⊰⌏""")
+					print(f"Info requested by {data.message.author.nickname}")
+				except Exception as e:
+					print(e)
+			
+def socketRoot():
+	j=0
+	while True:
+		if j>=300:
+			print("Updating socket.......")
+			client.close()
+			client.start()
+			print("")
+			j=0
+		j=j+1
+		time.sleep(1)
